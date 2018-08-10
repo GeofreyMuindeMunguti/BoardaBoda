@@ -1,5 +1,6 @@
 package com.example.board_a_boda;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -18,6 +19,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+
+import com.google.android.gms.maps.MapView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -60,8 +63,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                startActivity(new Intent(MainActivity.this,CartActivity.class));
             }
         });
 
@@ -84,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            startActivity(new Intent(MainActivity.this, SettingsActivity.class));
             return true;
         }
 
@@ -118,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+            View rootView = inflater.inflate(R.layout.mapview, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
             textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
@@ -135,17 +138,34 @@ public class MainActivity extends AppCompatActivity {
             super(fm);
         }
 
-        @Override
+       @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
-        }
+           // getItem is called to instantiate the fragment for the given page.
+           // Return a PlaceholderFragment (defined as a static inner class below).
+           // return PlaceholderFragment.newInstance(position + 1);
+
+           switch (position) {
+               case 0:
+                   TabView tab1 = new TabView();
+                   return tab1;
+               case 1:
+                   Shop tab2 = new Shop();
+                   return tab2;
+               case 2:
+                   History tab3 = new History();
+                   return tab3;
+                   default:
+                       return null;
+
+           }
+
+       }
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
             return 3;
         }
     }
+
+
 }
