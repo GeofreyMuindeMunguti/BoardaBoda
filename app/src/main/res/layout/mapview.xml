@@ -6,14 +6,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/current_location"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="?attr/actionBarSize"
-        />
+     <com.google.android.gms.maps.MapView
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:id="@+id/map">
+
+     </com.google.android.gms.maps.MapView>
 
 </android.support.constraint.ConstraintLayout>

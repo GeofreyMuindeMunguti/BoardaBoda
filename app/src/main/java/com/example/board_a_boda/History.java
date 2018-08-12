@@ -28,6 +28,17 @@ public class History extends Fragment {
 
         return rootView;
     }
+//    GoogleMap mGoogleMap;
+//    MapView mMapView;
+//    View mView;
+//    private Marker myMarker;
+////    mMapView =(MapView) mView.findViewById(R.id.map);
+//
+//      if(mMapView!=null){
+//        mMapView.onCreate(null);
+//        mMapView.onResume();
+//        mMapView.getMapAsync(this);
+//    }
 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

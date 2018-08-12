@@ -55,10 +55,15 @@ public class TabView extends Fragment implements OnMapReadyCallback {
         mGoogleMap=googleMap;
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-        Marker marker=googleMap.addMarker(new MarkerOptions().position(new LatLng(40.689247, -74.044502)).title("My Supermarket").snippet("Come shop with us!!"));
+        Marker marker=googleMap.addMarker(new MarkerOptions().position(new LatLng(-1.219222, 36.888219)).title("Thika Road Mall").snippet("Come shop with us!!"));
         //googleMap.setOnMarkerClickListener(this);
-        CameraPosition Geff = CameraPosition.builder().target(new LatLng(40.689247, -74.044502)).zoom(16).bearing(0).tilt(45).build();
-       googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(Geff));
+        CameraPosition Geff = CameraPosition.builder().target(new LatLng(-1.219222, 36.888219)).zoom(16).bearing(0).tilt(45).build();
+        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(Geff));
+
+        Marker marker2=googleMap.addMarker(new MarkerOptions().position(new LatLng(-1.232538, 36.878551)).title("Garden City Mall").snippet("Come shop with us!!"));
+        //googleMap.setOnMarkerClickListener(this);
+        CameraPosition Geff2 = CameraPosition.builder().target(new LatLng(-1.232538, 36.878551)).zoom(16).bearing(0).tilt(45).build();
+        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(Geff2));
 
 
     }
