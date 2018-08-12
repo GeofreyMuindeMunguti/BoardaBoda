@@ -84,22 +84,37 @@ public class CartActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_home) {
+            startActivity(new Intent(CartActivity.this, MainActivity.class));
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_shop) {
+            startActivity(new Intent(CartActivity.this, CartActivity.class));
 
         }
+
+         else if (id == R.id.nav_settings) {
+            startActivity(new Intent(CartActivity.this, SettingsActivity.class));
+
+        } else if (id == R.id.nav_share) {
+            shareIt();
+
+        }
+
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    private void shareIt() {
+//sharing implementation here
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        String shareBody = "Hey try our new shopping app:App_link_goes_in.here";
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, " New shopping app!!");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(sharingIntent, "Share via"));
+
+
     }
 }
