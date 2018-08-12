@@ -4,14 +4,22 @@
     android:layout_height="wrap_content"
     android:padding="10dp"
     android:clickable="true"
+    android:orientation="vertical"
     android:foreground="@drawable/ripple_effect"
       >
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
 
     <ImageView
         android:id="@+id/super_logo"
         android:layout_width="77dp"
         android:layout_height="60dp"
         android:src="@drawable/naivas" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,12 +29,14 @@
             android:layout_height="wrap_content"
             android:text="Supermarket Name"
             android:id="@+id/super_name"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Supermarket Motto"
             android:id="@+id/super_motto"/>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,4 +50,9 @@
             android:src="@drawable/ic_shopping" />
     </LinearLayout>
 
+</LinearLayout>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="@color/colorPrimary" />
 </LinearLayout>

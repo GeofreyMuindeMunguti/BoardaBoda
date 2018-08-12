@@ -48,6 +48,19 @@ public class Shop extends Fragment {
         lstShopItem.add(new ShopItem("Uchumi","Huduma kwa wote", R.drawable.uchumilogo));
         lstShopItem.add(new ShopItem("MassMatt","Forever full", R.drawable.logo));
 
+        lstShopItem.add(new ShopItem("Naivas","Saves you money", R.drawable.naivas));
+        lstShopItem.add(new ShopItem("Nakumatt","Here for you", R.drawable.nakumattlogo));
+        lstShopItem.add(new ShopItem("Tuskys","All you need", R.drawable.tuskyslogo));
+        lstShopItem.add(new ShopItem("Uchumi","Huduma kwa wote", R.drawable.uchumilogo));
+        lstShopItem.add(new ShopItem("MassMatt","Forever full", R.drawable.logo));
+
+        lstShopItem.add(new ShopItem("Naivas","Saves you money", R.drawable.naivas));
+        lstShopItem.add(new ShopItem("Nakumatt","Here for you", R.drawable.nakumattlogo));
+        lstShopItem.add(new ShopItem("Tuskys","All you need", R.drawable.tuskyslogo));
+        lstShopItem.add(new ShopItem("Uchumi","Huduma kwa wote", R.drawable.uchumilogo));
+        lstShopItem.add(new ShopItem("MassMatt","Forever full", R.drawable.logo));
+
+
 
 
     }
