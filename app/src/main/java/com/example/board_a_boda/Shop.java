@@ -42,6 +42,7 @@ public class Shop extends Fragment {
         super.onCreate(savedInstanceState);
 
         lstShopItem = new ArrayList<>();
+        lstShopItem.add(new ShopItem("Uchumi","Huduma kwa wote", R.drawable.uchumilogo));
         lstShopItem.add(new ShopItem("Naivas","Saves you money", R.drawable.naivas));
         lstShopItem.add(new ShopItem("Nakumatt","Here for you", R.drawable.nakumattlogo));
         lstShopItem.add(new ShopItem("Tuskys","All you need", R.drawable.tuskyslogo));
