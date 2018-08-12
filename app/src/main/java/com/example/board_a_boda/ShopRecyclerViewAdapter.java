@@ -1,7 +1,9 @@
 package com.example.board_a_boda;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +38,20 @@ public class ShopRecyclerViewAdapter extends RecyclerView.Adapter<ShopRecyclerVi
         holder.tv_motto.setText(mData.get(position).getSuper_motto());
         holder.img.setImageResource(mData.get(position).getPhoto());
 
+        holder.cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OpenCart();
+            }
+
+            private void OpenCart()
+            {
+                Intent intent  = new Intent(mContext,CartActivity.class);
+                mContext.startActivity(intent);
+
+            }
+        });
+
 
     }
 
@@ -49,6 +65,7 @@ public class ShopRecyclerViewAdapter extends RecyclerView.Adapter<ShopRecyclerVi
         private TextView tv_name;
         private TextView tv_motto;
         private ImageView img;
+        private ImageView cart;
 
 
 
@@ -59,9 +76,11 @@ public class ShopRecyclerViewAdapter extends RecyclerView.Adapter<ShopRecyclerVi
             tv_name = (TextView) itemView.findViewById(R.id.super_name);
             tv_motto =(TextView) itemView.findViewById(R.id.super_motto);
             img = (ImageView)itemView.findViewById(R.id.super_logo);
+            cart =(ImageView)itemView.findViewById(R.id.cart);
 
 
         }
+
 
     }
 }

@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.MapView;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    public ImageView goshopping;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this,CartActivity.class));
             }
         });
+
+
+
 
     }
 
@@ -166,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
             return 3;
         }
     }
+
 
 
 

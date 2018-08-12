@@ -5,15 +5,23 @@ public class ShopItem
     private String super_name;
     private String super_motto;
     private int photo;
+    private int cart;
 
-    public ShopItem(int photo) {
-        this.photo = photo;
+    public ShopItem() {
+
     }
 
     public ShopItem(String super_name, String super_motto, int photo) {
         this.super_name = super_name;
         this.super_motto = super_motto;
         this.photo = photo;
+        this.cart = cart;
+
+
+    }
+
+    public int getCart() {
+        return cart;
     }
 
     public int getPhoto() {
@@ -38,5 +46,9 @@ public class ShopItem
 
     public void setPhoto(int photo) {
         this.photo = photo;
+    }
+
+    public void setCart(int cart) {
+        this.cart = cart;
     }
 }
