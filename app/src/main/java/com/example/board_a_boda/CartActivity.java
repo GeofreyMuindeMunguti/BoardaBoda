@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,9 +15,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CartActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private List<CartItem> cartItems;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +32,40 @@ public class CartActivity extends AppCompatActivity
         setContentView(R.layout.activity_cart);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        cartItems = new ArrayList<>();
+        recyclerView = findViewById(R.id.cart_recyclerview);
+
+        cartItems.add(new CartItem("Omo"," 100","200",R.drawable.omo));
+        cartItems.add(new CartItem("Milk"," 50","171",R.drawable.milk));
+
+        cartItems.add(new CartItem("Weetabix"," 120","332",R.drawable.weetabix));
+
+        cartItems.add(new CartItem("Bread"," 50","77",R.drawable.bread));
+
+        cartItems.add(new CartItem("Rice"," 130","111",R.drawable.rice));
+
+        cartItems.add(new CartItem("Omo"," 100","200",R.drawable.omo));
+        cartItems.add(new CartItem("Milk"," 50","171",R.drawable.milk));
+
+        cartItems.add(new CartItem("Weetabix"," 120","332",R.drawable.weetabix));
+
+        cartItems.add(new CartItem("Bread"," 50","77",R.drawable.bread));
+
+        cartItems.add(new CartItem("Rice"," 130","111",R.drawable.rice));
+
+
+
+
+
+
+
+
+
+
+        CartItemRecyclerViewAdapter myadapter = new CartItemRecyclerViewAdapter(CartActivity.this,cartItems);
+        recyclerView.setLayoutManager(new LinearLayoutManager(CartActivity.this));
+        recyclerView.setAdapter(myadapter);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -33,6 +76,15 @@ public class CartActivity extends AppCompatActivity
             }
         });
 
+        String[] arraySpinner = new String[] {
+                "Breakfast", "Groceries", "Electronics", "Clothes", "Shoes"
+        };
+        Spinner s = (Spinner) findViewById(R.id.spinner_cart);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, arraySpinner);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        s.setAdapter(adapter);
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -41,6 +93,9 @@ public class CartActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+
     }
 
     @Override

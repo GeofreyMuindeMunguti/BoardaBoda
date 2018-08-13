@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#FF8000</color>
     <color name="colorAccent">#FF4081</color>
     <color name="backgroundcolor">#FFFFFF</color>
+    <color name="topbartint">#808080</color>
 </resources>
