@@ -33,6 +33,8 @@ public class TabView extends Fragment implements OnMapReadyCallback {
         mView = inflater.inflate(R.layout.mapview, container, false);
 
         return mView;
+
+       // mGoogleMap.setOnMarkerClickListener(Marker marker);
     }
 
     @Override
@@ -54,6 +56,8 @@ public class TabView extends Fragment implements OnMapReadyCallback {
         MapsInitializer.initialize(getContext());
         mGoogleMap=googleMap;
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
+
 
         Marker marker=googleMap.addMarker(new MarkerOptions().position(new LatLng(-1.219222, 36.888219)).title("Thika Road Mall").snippet("Come shop with us!!"));
         //googleMap.setOnMarkerClickListener(this);

@@ -19,6 +19,9 @@ import android.view.ViewGroup;
 
 import android.widget.ImageView;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.Marker;
+
 public class MainActivity extends AppCompatActivity {
 
     /**
@@ -36,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
     public ImageView goshopping;
+    private GoogleMap googleMap;
+    private Marker myMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
 
 
     @Override
