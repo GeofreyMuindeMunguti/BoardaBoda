@@ -22,6 +22,8 @@ import android.widget.ImageView;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
 
+//import static com.example.board_a_boda.MainActivity.PlaceholderFragment.ARG_SECTION_NUMBER;
+
 public class MainActivity extends AppCompatActivity {
 
     /**
@@ -47,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
@@ -70,7 +74,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        int defaultValue = 0;
+        int page = getIntent().getIntExtra("One", defaultValue);
+        mViewPager.setCurrentItem(page);
 
 
     }
@@ -118,6 +124,8 @@ public class MainActivity extends AppCompatActivity {
          * number.
          */
         public static PlaceholderFragment newInstance(int sectionNumber) {
+
+
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
@@ -147,6 +155,9 @@ public class MainActivity extends AppCompatActivity {
 
        @Override
         public Fragment getItem(int position) {
+
+
+
            // getItem is called to instantiate the fragment for the given page.
            // Return a PlaceholderFragment (defined as a static inner class below).
            // return PlaceholderFragment.newInstance(position + 1);

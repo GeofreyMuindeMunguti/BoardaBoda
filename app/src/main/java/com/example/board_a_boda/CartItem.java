@@ -4,16 +4,22 @@ public class CartItem {
     private String item_name;
     private  String item_price;
     private String item_number;
+    private String itemtobuy;
     private  int photo;
 
     public CartItem() {
     }
 
-    public CartItem(String item_name, String item_price, String item_number, int photo) {
+    public CartItem(String item_name, String item_price, String item_number,String itemtobuy, int photo) {
         this.item_name = item_name;
         this.item_price = item_price;
         this.item_number = item_number;
+        this.itemtobuy =itemtobuy;
         this.photo = photo;
+    }
+
+    public String getItemtobuy() {
+        return itemtobuy;
     }
 
     public int getPhoto() {
@@ -46,5 +52,9 @@ public class CartItem {
 
     public void setPhoto(int photo) {
         this.photo = photo;
+    }
+
+    public void setItemtobuy(String itemtobuy) {
+        this.itemtobuy = itemtobuy;
     }
 }

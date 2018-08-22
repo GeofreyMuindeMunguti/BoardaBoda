@@ -64,7 +64,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.board_a_boda.MainActivity" />
         </activity>
-        <activity android:name=".ShoppedActivity"></activity>
+        <activity android:name=".ShoppedActivity" />
     </application>
 
 </manifest>

@@ -1,10 +1,16 @@
 package com.example.board_a_boda;
 
+import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -24,6 +30,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import android.R.layout;
@@ -39,6 +46,8 @@ public class CartActivity extends AppCompatActivity
     private Button buy;
     private TextView tv_itname;
     private Button btn_buy;
+    private String shoppe;
+   // BroadcastReceiver mMessageReceiver;
 
 
     @Override
@@ -48,26 +57,29 @@ public class CartActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
+                new IntentFilter("custom-message"));
+
         cartItems = new ArrayList<>();
         recyclerView = findViewById(R.id.cart_recyclerview);
 
-        cartItems.add(new CartItem("Omo"," 100","200",R.drawable.omo));
-        cartItems.add(new CartItem("Milk"," 50","171",R.drawable.milk));
+        cartItems.add(new CartItem("Omo"," 100","200","1",R.drawable.omo));
+        cartItems.add(new CartItem("Milk"," 50","171","1",R.drawable.milk));
 
-        cartItems.add(new CartItem("Weetabix"," 120","332",R.drawable.weetabix));
+        cartItems.add(new CartItem("Weetabix"," 120","332","1",R.drawable.weetabix));
 
-        cartItems.add(new CartItem("Bread"," 50","77",R.drawable.bread));
+        cartItems.add(new CartItem("Bread"," 50","77","1",R.drawable.bread));
 
-        cartItems.add(new CartItem("Rice"," 130","111",R.drawable.rice));
+        cartItems.add(new CartItem("Rice"," 130","111","1",R.drawable.rice));
 
-        cartItems.add(new CartItem("Omo"," 100","200",R.drawable.omo));
-        cartItems.add(new CartItem("Milk"," 50","171",R.drawable.milk));
+        cartItems.add(new CartItem("Omo"," 100","200","1",R.drawable.omo));
+        cartItems.add(new CartItem("Milk"," 50","171","1",R.drawable.milk));
 
-        cartItems.add(new CartItem("Weetabix"," 120","332",R.drawable.weetabix));
+        cartItems.add(new CartItem("Weetabix"," 120","332","1",R.drawable.weetabix));
 
-        cartItems.add(new CartItem("Bread"," 50","77",R.drawable.bread));
+        cartItems.add(new CartItem("Bread"," 50","77","1",R.drawable.bread));
 
-        cartItems.add(new CartItem("Rice"," 130","111",R.drawable.rice));
+        cartItems.add(new CartItem("Rice"," 130","111","1",R.drawable.rice));
 
 
 
@@ -79,17 +91,17 @@ public class CartActivity extends AppCompatActivity
         recyclerView.setLayoutManager(new LinearLayoutManager(CartActivity.this));
         recyclerView.setAdapter(myadapter);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-               // String s = CartItemRecyclerViewAdapter.onBindViewHolder
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-                startActivity(new Intent(CartActivity.this,ShoppedActivity.class));
-            }
-        });
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//               // String s = CartItemRecyclerViewAdapter.onBindViewHolder
+////                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+////                        .setAction("Action", null).show();
+//                startActivity(new Intent(CartActivity.this,ShoppedActivity.class));
+//            }
+//        });
 
         String[] arraySpinner = new String[] {
                 "Breakfast", "Groceries", "Electronics", "Clothes", "Shoes"
@@ -149,8 +161,90 @@ public class CartActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
+  BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+      @Override
+      public void onReceive(Context context, Intent intent) {
+          // Get extra data included in the Intent
+          final String ItemName = intent.getStringExtra("item");
+          String qty = intent.getStringExtra("quantity");
+          //Toast.makeText(CartActivity.this, ItemName + " " +qty,Toast.LENGTH_SHORT).show();
+          shoppe = intent.getStringExtra("item");
+
+          Log.d("Things",ItemName);
+
+
+
+
+
+          FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+          fab.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+
+                  if (ItemName != null) {
+                      AlertDialog.Builder builder;
+                      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                          builder = new AlertDialog.Builder(CartActivity.this, android.R.style.Theme_DeviceDefault_Light_Dialog);
+                      } else {
+                          builder = new AlertDialog.Builder(CartActivity.this);
+                      }
+                      builder.setTitle("Place Order")
+                              .setMessage(ItemName)
+                              .setPositiveButton(R.string.place, new DialogInterface.OnClickListener() {
+                                  public void onClick(DialogInterface dialog, int which) {
+                                      // continue with delete
+                                      //place order
+
+                                      AlertDialog.Builder builder;
+                                      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                          builder = new AlertDialog.Builder(CartActivity.this, android.R.style.Theme_DeviceDefault_Light_Dialog);
+                                      } else {
+                                          builder = new AlertDialog.Builder(CartActivity.this);
+                                      }
+                                      builder.setTitle("Order Placed")
+                                              .setMessage("Your order was placed")
+                                              .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                                                  public void onClick(DialogInterface dialog, int which) {
+                                                      startActivity(new Intent(CartActivity.this,CartActivity.class));
+
+                                                  }
+                                              })
+                                              .setNegativeButton(R.string.view, new DialogInterface.OnClickListener() {
+                                                  public void onClick(DialogInterface dialog, int which) {
+                                                      int page = 2;
+                                                      Intent intent = new Intent(CartActivity.this,MainActivity.class);
+                                                      intent.putExtra("One", page);// One is your argument
+                                                      startActivity(intent);
+                                                  }
+                                              })
+                                              .setIcon(android.R.drawable.ic_dialog_info)
+                                              .show();
+
+
+
+                                  }
+                              })
+                              .setNegativeButton(R.string.edit, new DialogInterface.OnClickListener() {
+                                  public void onClick(DialogInterface dialog, int which) {
+                                       //do here
+                                      //go edit
+                                  }
+                              })
+                              .setIcon(R.drawable.ic_shopping)
+                              .show();
+                  }
+                  else
+                  {
+                      Toast.makeText(CartActivity.this,"Nothing is picked",Toast.LENGTH_SHORT).show();
+                  }
+              }
+
+          });
+      }
+  };
+
+
+
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
@@ -185,6 +279,27 @@ public class CartActivity extends AppCompatActivity
         sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, " New shopping app!!");
         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
         startActivity(Intent.createChooser(sharingIntent, "Share via"));
+
+
+    }
+
+    @Override
+    public void shoppinglstdata(Array[] shoppinglist) {
+        String shoppe = shoppinglist.toString();
+//        final Intent i = new Intent(this, ShoppedActivity.class);
+//        i.putExtra("shoppe",shoppe);
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                // String s = CartItemRecyclerViewAdapter.onBindViewHolder
+////                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+////                        .setAction("Action", null).show();
+//                startActivity(i);
+//            }
+//        });
+
 
 
     }
