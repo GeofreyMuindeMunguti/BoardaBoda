@@ -72,16 +72,6 @@ public class CartActivity extends AppCompatActivity
 
         cartItems.add(new CartItem("Rice"," 130","111","1",R.drawable.rice));
 
-        cartItems.add(new CartItem("Omo"," 100","200","1",R.drawable.omo));
-        cartItems.add(new CartItem("Milk"," 50","171","1",R.drawable.milk));
-
-        cartItems.add(new CartItem("Weetabix"," 120","332","1",R.drawable.weetabix));
-
-        cartItems.add(new CartItem("Bread"," 50","77","1",R.drawable.bread));
-
-        cartItems.add(new CartItem("Rice"," 130","111","1",R.drawable.rice));
-
-
 
 
 
@@ -182,7 +172,7 @@ public class CartActivity extends AppCompatActivity
               @Override
               public void onClick(View view) {
 
-                  if (ItemName != null) {
+                  if (!ItemName.equals("[]")) {
                       AlertDialog.Builder builder;
                       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                           builder = new AlertDialog.Builder(CartActivity.this, android.R.style.Theme_DeviceDefault_Light_Dialog);

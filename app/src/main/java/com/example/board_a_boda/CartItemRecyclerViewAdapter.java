@@ -71,6 +71,7 @@ public class CartItemRecyclerViewAdapter extends RecyclerView.Adapter<CartItemRe
         holder.btn_buy.setOnClickListener(new View.OnClickListener() {
             private boolean state = false;
 
+
             @Override
             public void onClick(View view) {
                 if (state) {
@@ -83,46 +84,71 @@ public class CartItemRecyclerViewAdapter extends RecyclerView.Adapter<CartItemRe
 
                     holder.btn_buy.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.button_background));
 
+
                     CartItem i = mData.get(position);
                     String name = mData.get(position).getItem_name();
                     String totprice = mData.get(position).getItem_price();
                     String price = holder.tv_numbertobuy.getText().toString();
+                    holder.tv_numbertobuy.setText(price);
+                    int count=0;
+                    for(String s1:shoppinglist) {
+                        if (s1.contains(name)) {
+
+                            Log.d("Found At", String.valueOf(count));
+                            shoppinglist.remove(count);
+                            Log.d("new list",shoppinglist.toString());
 
 
-                    shoppinglist.remove(name);
+                                String ItemName = shoppinglist.toString();
+                                String qty = shoppinglistprice.toString();
+                                Intent intent = new Intent("custom-message");
+                                //            intent.putExtra("quantity",Integer.parseInt(quantity.getText().toString()));
+                                intent.putExtra("quantity", qty);
+                                intent.putExtra("item", ItemName);
+                                LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
+                                //Toast.makeText(mContext,"Added "+name+" to cart",Toast.LENGTH_SHORT).show();
 
 
-                }
-                else {
+                            break;
+                        }
+                        count++;
+                    }
+
+
+                     }
+
+                      else
+                     {
                     state =true;
                    // holder.btn_buy.setText("True");
 
 
                     holder.btn_buy.setText("Remove");
-                    holder.btn_buy.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.button_background));
+                         holder.btn_buy.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.button_background));
 
-                    CartItem i = mData.get(position);
-                    String name = mData.get(position).getItem_name();
-                    String totprice = mData.get(position).getItem_price();
-                    String price = holder.tv_numbertobuy.getText().toString();
-
-
-                    shoppinglist.add(name + " No: " + price + " Price of one:" + totprice);
-
-                    shoppinglistprice.add(String.valueOf(totprice));
+                        CartItem i = mData.get(position);
+                        String name = mData.get(position).getItem_name();
+                        String totprice = mData.get(position).getItem_price();
+                        String price = holder.tv_numbertobuy.getText().toString();
 
 
-                    Log.d("", totprice);
 
-                    String ItemName = shoppinglist.toString();
-                    String qty = shoppinglistprice.toString();
-                    Intent intent = new Intent("custom-message");
-                    //            intent.putExtra("quantity",Integer.parseInt(quantity.getText().toString()));
-                    intent.putExtra("quantity", qty);
-                    intent.putExtra("item", ItemName);
-                    LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
-                    //Toast.makeText(mContext,"Added "+name+" to cart",Toast.LENGTH_SHORT).show();
+                        shoppinglist.add(name + " No: " + price + " Price of one:" + totprice);
 
+                        shoppinglistprice.add(String.valueOf(totprice));
+
+
+                        Log.d("", totprice);
+                    if(!shoppinglist.isEmpty()) {
+                        String ItemName = shoppinglist.toString();
+                        String qty = shoppinglistprice.toString();
+                        Intent intent = new Intent("custom-message");
+                        //            intent.putExtra("quantity",Integer.parseInt(quantity.getText().toString()));
+                        intent.putExtra("quantity", qty);
+                        intent.putExtra("item", ItemName);
+                        LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
+                        //Toast.makeText(mContext,"Added "+name+" to cart",Toast.LENGTH_SHORT).show();
+                    }
 
                     for (String s : shoppinglist) {
                         //Log.d("My array list content: ", s);
@@ -163,7 +189,7 @@ public class CartItemRecyclerViewAdapter extends RecyclerView.Adapter<CartItemRe
             tv_itemprice = itemView.findViewById(item_price);
             tv_itnumber = (TextView) itemView.findViewById(number);
             tv_photo = (ImageView) itemView.findViewById(item_logo);
-            tv_numbertobuy =itemView.findViewById(R.id.item_number);
+            tv_numbertobuy =(EditText) itemView.findViewById(R.id.item_number);
             btn_buy = (Button) itemView.findViewById(buy);
 
 
