@@ -166,11 +166,12 @@ public class CartActivity extends AppCompatActivity
       public void onReceive(Context context, Intent intent) {
           // Get extra data included in the Intent
           final String ItemName = intent.getStringExtra("item");
-          String qty = intent.getStringExtra("quantity");
+          final String qty = intent.getStringExtra("quantity");
           //Toast.makeText(CartActivity.this, ItemName + " " +qty,Toast.LENGTH_SHORT).show();
           shoppe = intent.getStringExtra("item");
 
           Log.d("Things",ItemName);
+          Log.d("Total price",qty);
 
 
 
@@ -189,7 +190,7 @@ public class CartActivity extends AppCompatActivity
                           builder = new AlertDialog.Builder(CartActivity.this);
                       }
                       builder.setTitle("Place Order")
-                              .setMessage(ItemName)
+                              .setMessage(ItemName +" \n")
                               .setPositiveButton(R.string.place, new DialogInterface.OnClickListener() {
                                   public void onClick(DialogInterface dialog, int which) {
                                       // continue with delete

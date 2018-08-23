@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import android.R.layout;
 
@@ -28,6 +29,7 @@ public class CartItemRecyclerViewAdapter extends RecyclerView.Adapter<CartItemRe
     Context mContext;
     List<CartItem> mData;
     String string;
+
     final ArrayList<String> shoppinglist = new ArrayList();
     final ArrayList<String> shoppinglistprice = new ArrayList();
 
@@ -67,39 +69,66 @@ public class CartItemRecyclerViewAdapter extends RecyclerView.Adapter<CartItemRe
 
 
         holder.btn_buy.setOnClickListener(new View.OnClickListener() {
+            private boolean state = false;
+
             @Override
             public void onClick(View view) {
-
-                holder.btn_buy.setText("Added");
-                holder. btn_buy.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.button_background));
-
-                CartItem i=   mData.get(position);
-                String name = mData.get(position).getItem_name();
-                String price = holder.tv_numbertobuy.getText().toString();
-                shoppinglist.add(name+" No: "+price);
-                shoppinglistprice.add(price);
+                if (state) {
+                    state = false;
 
 
-
-                Log.d("", String.valueOf(i));
-
-                String ItemName =shoppinglist.toString();
-                String qty = shoppinglistprice.toString();
-                Intent intent = new Intent("custom-message");
-                //            intent.putExtra("quantity",Integer.parseInt(quantity.getText().toString()));
-                intent.putExtra("quantity",qty);
-                intent.putExtra("item",ItemName);
-                LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
-             //Toast.makeText(mContext,"Added "+name+" to cart",Toast.LENGTH_SHORT).show();
+                    holder.btn_buy.setText("Buy");
+                    // String string = shoppinglist.toString();
 
 
+                    holder.btn_buy.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.button_background));
 
-                for (String s : shoppinglist){
-                    //Log.d("My array list content: ", s);
-                    //Toast.makeText(mContext, s, Toast.LENGTH_SHORT).show();
+                    CartItem i = mData.get(position);
+                    String name = mData.get(position).getItem_name();
+                    String totprice = mData.get(position).getItem_price();
+                    String price = holder.tv_numbertobuy.getText().toString();
+
+
+                    shoppinglist.remove(name);
+
+
                 }
-               // String string = shoppinglist.toString();
+                else {
+                    state =true;
+                   // holder.btn_buy.setText("True");
 
+
+                    holder.btn_buy.setText("Remove");
+                    holder.btn_buy.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.button_background));
+
+                    CartItem i = mData.get(position);
+                    String name = mData.get(position).getItem_name();
+                    String totprice = mData.get(position).getItem_price();
+                    String price = holder.tv_numbertobuy.getText().toString();
+
+
+                    shoppinglist.add(name + " No: " + price + " Price of one:" + totprice);
+
+                    shoppinglistprice.add(String.valueOf(totprice));
+
+
+                    Log.d("", totprice);
+
+                    String ItemName = shoppinglist.toString();
+                    String qty = shoppinglistprice.toString();
+                    Intent intent = new Intent("custom-message");
+                    //            intent.putExtra("quantity",Integer.parseInt(quantity.getText().toString()));
+                    intent.putExtra("quantity", qty);
+                    intent.putExtra("item", ItemName);
+                    LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
+                    //Toast.makeText(mContext,"Added "+name+" to cart",Toast.LENGTH_SHORT).show();
+
+
+                    for (String s : shoppinglist) {
+                        //Log.d("My array list content: ", s);
+                        //Toast.makeText(mContext, s, Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
             //String string = shoppinglist.toString();
 
