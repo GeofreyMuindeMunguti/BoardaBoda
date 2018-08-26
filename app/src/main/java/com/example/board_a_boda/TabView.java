@@ -39,7 +39,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class TabView extends Fragment implements OnMapReadyCallback,GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
-        com.google.android.gms.location.LocationListener {
+        com.google.android.gms.location.LocationListener , GoogleMap.OnMarkerClickListener {
     private View view;
     SupportMapFragment supportMapFragment;
     LocationRequest mLocationRequest;
@@ -53,6 +53,7 @@ public class TabView extends Fragment implements OnMapReadyCallback,GoogleApiCli
     //GoogleMap mGoogleMap;
     MapView mMapView;
     View mView;
+    Marker marker2;
     //private Marker myMarker;
 
     public TabView()
@@ -107,6 +108,8 @@ public class TabView extends Fragment implements OnMapReadyCallback,GoogleApiCli
         mGoogleMap = googleMap;
         mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
+        googleMap.setOnMarkerClickListener(this);
+
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
         {
             if (ContextCompat.checkSelfPermission(this.getActivity(),
@@ -130,17 +133,30 @@ public class TabView extends Fragment implements OnMapReadyCallback,GoogleApiCli
 
 
         Marker marker=googleMap.addMarker(new MarkerOptions().position(new LatLng(-1.219222, 36.888219)).title("Thika Road Mall").snippet("Come shop with us!!"));
-        //googleMap.setOnMarkerClickListener(this);
+         marker.showInfoWindow();
         CameraPosition Geff = CameraPosition.builder().target(new LatLng(-1.219222, 36.888219)).zoom(16).bearing(0).tilt(45).build();
         googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(Geff));
 
-        Marker marker2=googleMap.addMarker(new MarkerOptions().position(new LatLng(-1.232538, 36.878551)).title("Garden City Mall").snippet("Come shop with us!!"));
-        //googleMap.setOnMarkerClickListener(this);
+         marker2=googleMap.addMarker(new MarkerOptions().position(new LatLng(-1.296154, 36.822448)).title("Naivas Highway Mall").snippet("Click marker to shop with us!!"));
+        marker2.showInfoWindow();
         CameraPosition Geff2 = CameraPosition.builder().target(new LatLng(-1.232538, 36.878551)).zoom(16).bearing(0).tilt(45).build();
         googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(Geff2));
 
 
+
+
     }
+
+    @Override
+    public boolean onMarkerClick(final Marker marker) {
+        if (marker.equals(marker2)) {
+
+            startActivity(new Intent(TabView.this.getActivity(),CartActivity.class));
+
+        }
+        return false;
+    }
+
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
@@ -279,6 +295,11 @@ public class TabView extends Fragment implements OnMapReadyCallback,GoogleApiCli
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
 
     }
+
+
+
+
+
     //@Override
 
 }
