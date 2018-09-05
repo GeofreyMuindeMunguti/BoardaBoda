@@ -147,6 +147,12 @@ public class CartActivity extends AppCompatActivity
 
             return true;
         }
+        if (id == R.id.action_login)
+        {
+            startActivity(new Intent(CartActivity.this,ActivityLogin.class));
+            return  true;
+
+        }
 
         return super.onOptionsItemSelected(item);
     }

@@ -31,6 +31,7 @@ public class ShopRecyclerViewAdapter extends RecyclerView.Adapter<ShopRecyclerVi
         return vHolder;
     }
 
+
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 

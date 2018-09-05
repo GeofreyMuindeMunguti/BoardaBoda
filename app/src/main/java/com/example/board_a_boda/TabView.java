@@ -54,6 +54,7 @@ public class TabView extends Fragment implements OnMapReadyCallback,GoogleApiCli
     MapView mMapView;
     View mView;
     Marker marker2;
+    Marker myLoc;
     //private Marker myMarker;
 
     public TabView()
@@ -102,60 +103,7 @@ public class TabView extends Fragment implements OnMapReadyCallback,GoogleApiCli
         //supportMapFragment.getMapAsync(this);
     }
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
 
-        mGoogleMap = googleMap;
-        mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-
-        googleMap.setOnMarkerClickListener(this);
-
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-        {
-            if (ContextCompat.checkSelfPermission(this.getActivity(),
-                    android.Manifest.permission.ACCESS_FINE_LOCATION)
-                    == PackageManager.PERMISSION_GRANTED)
-            {
-                //buildGoogleApiClient();
-                mGoogleMap.setMyLocationEnabled(true);
-            } else
-            {
-                //Request Location Permission to user
-                checkPermission();
-            }
-        } else
-        {
-            //buildGoogleApiClient();
-            mGoogleMap.setMyLocationEnabled(true);
-        }
-
-
-
-
-        Marker marker=googleMap.addMarker(new MarkerOptions().position(new LatLng(-1.219222, 36.888219)).title("Thika Road Mall").snippet("Come shop with us!!"));
-         marker.showInfoWindow();
-        CameraPosition Geff = CameraPosition.builder().target(new LatLng(-1.219222, 36.888219)).zoom(16).bearing(0).tilt(45).build();
-        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(Geff));
-
-         marker2=googleMap.addMarker(new MarkerOptions().position(new LatLng(-1.296154, 36.822448)).title("Naivas Highway Mall").snippet("Click marker to shop with us!!"));
-        marker2.showInfoWindow();
-        CameraPosition Geff2 = CameraPosition.builder().target(new LatLng(-1.232538, 36.878551)).zoom(16).bearing(0).tilt(45).build();
-        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(Geff2));
-
-
-
-
-    }
-
-    @Override
-    public boolean onMarkerClick(final Marker marker) {
-        if (marker.equals(marker2)) {
-
-            startActivity(new Intent(TabView.this.getActivity(),CartActivity.class));
-
-        }
-        return false;
-    }
 
 
     @Override
@@ -179,10 +127,10 @@ public class TabView extends Fragment implements OnMapReadyCallback,GoogleApiCli
                 != PackageManager.PERMISSION_GRANTED)
         {
 
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this.getActivity(),
+            if (ActivityCompat.shouldShowRequestPermissionRationale(TabView.this.getActivity(),
                     android.Manifest.permission.ACCESS_FINE_LOCATION))
             {
-                new AlertDialog.Builder(this.getActivity())
+                new AlertDialog.Builder(TabView.this.getActivity())
                         .setTitle("Location Permission Needed")
                         .setMessage("This app needs the Location permission, please accept to use location functionality")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener()
@@ -284,7 +232,7 @@ public class TabView extends Fragment implements OnMapReadyCallback,GoogleApiCli
             mCurrLocationMarker.remove();
         }
 
-        //Place current location marker
+       // Place current location marker
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
@@ -292,8 +240,68 @@ public class TabView extends Fragment implements OnMapReadyCallback,GoogleApiCli
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
         mCurrLocationMarker = mGoogleMap.addMarker(markerOptions);
         //move map camera and we can also set zoom level
-        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
+        CameraPosition Geffaa = CameraPosition.builder().target( (latLng)).zoom(16).tilt(45).build();
+        mGoogleMap.moveCamera(CameraUpdateFactory.newCameraPosition(Geffaa));
 
+//
+//        myLoc=mGoogleMap.addMarker(new MarkerOptions().position(latLng).title("Naivas Highway Mall").snippet("Click marker to shop with us!!"));
+//        myLoc.showInfoWindow();
+//        CameraPosition Geff2 = CameraPosition.builder().target(latLng).zoom(16).tilt(45).build();
+//        mGoogleMap.moveCamera(CameraUpdateFactory.newCameraPosition(Geff2));
+    }
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+        mGoogleMap = googleMap;
+        mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
+        googleMap.setOnMarkerClickListener(this);
+
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+        {
+            if (ContextCompat.checkSelfPermission(this.getActivity(),
+                    android.Manifest.permission.ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED)
+            {
+                //buildGoogleApiClient();
+                mGoogleMap.setMyLocationEnabled(true);
+            } else
+            {
+                //Request Location Permission to user
+                checkPermission();
+            }
+        } else
+        {
+            //buildGoogleApiClient();
+            mGoogleMap.setMyLocationEnabled(true);
+        }
+
+
+
+//
+//        Marker marker=googleMap.addMarker(new MarkerOptions().position(new LatLng(-1.219222, 36.888219)).title("Thika Road Mall").snippet("Come shop with us!!"));
+//         marker.showInfoWindow();
+//        CameraPosition Geff = CameraPosition.builder().target(new LatLng(-1.219222, 36.888219)).zoom(16).bearing(0).tilt(45).build();
+//        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(Geff));
+
+        marker2=googleMap.addMarker(new MarkerOptions().position(new LatLng(-1.287003, 36.880893)).title("Tuskys BuruBuru").snippet("Click marker to shop with us!!"));
+        marker2.showInfoWindow();
+        CameraPosition Geff2 = CameraPosition.builder().target(new LatLng(-1.287003, 36.880893)).zoom(16).tilt(45).build();
+       googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(Geff2));
+
+
+
+
+    }
+
+    @Override
+    public boolean onMarkerClick(final Marker marker) {
+        if (marker.equals(marker2)) {
+
+            startActivity(new Intent(TabView.this.getActivity(),CartActivity.class));
+
+        }
+        return false;
     }
 
 

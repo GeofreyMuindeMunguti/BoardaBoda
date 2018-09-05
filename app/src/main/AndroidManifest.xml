@@ -66,6 +66,7 @@
                 android:value="com.example.board_a_boda.MainActivity" />
         </activity>
         <activity android:name=".ShoppedActivity" />
+        <activity android:name=".ActivityLogin"></activity>
     </application>
 
 </manifest>

@@ -31,7 +31,7 @@
                 android:id="@+id/super_logo"
                 android:layout_width="63dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/naivas" />
+                android:src="@drawable/tuskyslogo" />
 
             <Spinner
                 android:id="@+id/spinner_cart"

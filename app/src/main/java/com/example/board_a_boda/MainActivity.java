@@ -102,6 +102,12 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, SettingsActivity.class));
             return true;
         }
+        if (id == R.id.action_login)
+        {
+            startActivity(new Intent(MainActivity.this,ActivityLogin.class));
+            return true;
+
+        }
 
         return super.onOptionsItemSelected(item);
     }
